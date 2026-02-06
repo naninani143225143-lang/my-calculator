@@ -53,10 +53,11 @@ button{
  padding-top:20px;
 }
 
-/* ===== GAMES TABS ===== */
+/* ===== GAME TABS ===== */
 .game-tabs{
  display:flex;
  gap:10px;
+ flex-wrap:wrap;
  margin-top:20px;
 }
 
@@ -81,7 +82,7 @@ button{
  display:block;
 }
 
-/* ===== CANDY CRUSH GRID ===== */
+/* ===== CANDY CRUSH ===== */
 #candyBoard{
  display:grid;
  grid-template-columns: repeat(8, 40px);
@@ -102,6 +103,55 @@ button{
  display:block;
  margin:auto;
  touch-action:none;
+ border-radius:10px;
+}
+
+/* ===== CAR RACING ===== */
+#raceRoad{
+ width:320px;
+ height:450px;
+ background:#222;
+ position:relative;
+ margin:auto;
+ overflow:hidden;
+ border-radius:10px;
+}
+
+#playerCar{
+ width:50px;
+ height:90px;
+ position:absolute;
+ bottom:10px;
+ left:135px;
+}
+
+/* ===== TEMPLE RUN STYLE ===== */
+#runnerBox{
+ width:320px;
+ height:350px;
+ background:#87CEEB;
+ position:relative;
+ margin:auto;
+ overflow:hidden;
+ border-radius:10px;
+}
+
+#runner{
+ width:40px;
+ height:60px;
+ background:red;
+ position:absolute;
+ bottom:10px;
+ left:140px;
+ border-radius:10px;
+}
+
+.obstacle{
+ width:40px;
+ height:40px;
+ background:black;
+ position:absolute;
+ top:-40px;
 }
 </style>
 </head>
@@ -184,13 +234,14 @@ function div(){
 
 <div class="game-tabs">
 <div class="game-tab active" onclick="showGame('candy')">🍬 Candy Crush</div>
-<div class="game-tab" onclick="showGame('snake')">🐍 Snake Game</div>
+<div class="game-tab" onclick="showGame('snake')">🐍 Snake</div>
+<div class="game-tab" onclick="showGame('racing')">🏎️ Car Racing</div>
+<div class="game-tab" onclick="showGame('temple')">🏃 Temple Run</div>
 </div>
 
 <!-- ===== CANDY CRUSH ===== -->
 <div id="candy" class="game-box active">
 <h3>🍬 Mini Candy Crush (Match 3)</h3>
-<p>Swap candies to match 3 and score points.</p>
 <h4>Score: <span id="score">0</span></h4>
 <div id="candyBoard"></div>
 </div>
@@ -200,6 +251,24 @@ function div(){
 <h3>🐍 Snake Game</h3>
 <p>Use arrows or swipe to move.</p>
 <canvas id="snakeCanvas" width="320" height="320"></canvas>
+</div>
+
+<!-- ===== CAR RACING ===== -->
+<div id="racing" class="game-box">
+<h3>🏎️ Car Racing</h3>
+<p>Use Left / Right arrows (or tap sides).</p>
+<div id="raceRoad">
+<img id="playerCar" src="https://i.postimg.cc/3J9wKx9m/car.png">
+</div>
+</div>
+
+<!-- ===== TEMPLE RUN ===== -->
+<div id="temple" class="game-box">
+<h3>🏃 Temple Run (Mini)</h3>
+<p>Tap to Jump</p>
+<div id="runnerBox">
+<div id="runner"></div>
+</div>
 </div>
 
 </div>
@@ -214,7 +283,7 @@ function showGame(game){
  event.target.classList.add('active');
 }
 
-/* ========== CANDY CRUSH LOGIC ========== */
+/* ========== CANDY CRUSH ========== */
 const colors = ["red","blue","green","yellow","purple","orange"];
 const board = [];
 const size = 8;
@@ -239,11 +308,7 @@ function createBoard(){
   }
  }
 }
-
 function selectCandy(){
- let r = this.dataset.r;
- let c = this.dataset.c;
-
  if(!firstCell){
   firstCell = this;
   this.style.outline="3px solid white";
@@ -253,30 +318,22 @@ function selectCandy(){
   firstCell = null;
  }
 }
-
 function swapCandies(a,b){
  let r1=a.dataset.r, c1=a.dataset.c;
  let r2=b.dataset.r, c2=b.dataset.c;
-
  let temp = board[r1][c1];
  board[r1][c1] = board[r2][c2];
  board[r2][c2] = temp;
-
  drawBoard();
  checkMatches();
 }
-
 function drawBoard(){
- let divs = document.querySelectorAll(".candy");
- divs.forEach(d=>{
-  let r=d.dataset.r, c=d.dataset.c;
-  d.style.background = board[r][c];
+ document.querySelectorAll(".candy").forEach(d=>{
+  d.style.background = board[d.dataset.r][d.dataset.c];
  });
 }
-
 function checkMatches(){
  let toClear = [];
-
  for(let r=0;r<size;r++){
   for(let c=0;c<size-2;c++){
    if(board[r][c] && board[r][c]==board[r][c+1] && board[r][c]==board[r][c+2]){
@@ -284,7 +341,6 @@ function checkMatches(){
    }
   }
  }
-
  for(let c=0;c<size;c++){
   for(let r=0;r<size-2;r++){
    if(board[r][c] && board[r][c]==board[r+1][c] && board[r][c]==board[r+2][c]){
@@ -292,22 +348,18 @@ function checkMatches(){
    }
   }
  }
-
  if(toClear.length>0){
   score += toClear.length;
   document.getElementById("score").innerText = score;
-
   toClear.forEach(p=>{
    board[p[0]][p[1]] = colors[Math.floor(Math.random()*colors.length)];
   });
-
   setTimeout(drawBoard,300);
  }
 }
-
 createBoard();
 
-/* ========== SNAKE GAME ========== */
+/* ========== SNAKE GAME (WORKING) ========== */
 const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -323,7 +375,6 @@ document.addEventListener("keydown", e=>{
  if(e.key=="ArrowRight") direction="RIGHT";
 });
 
-// Mobile Swipe Support
 let touchStartX = 0;
 canvas.addEventListener("touchstart", e=>{
  touchStartX = e.touches[0].clientX;
@@ -334,40 +385,72 @@ canvas.addEventListener("touchend", e=>{
  if(touchEndX > touchStartX) direction="RIGHT";
 });
 
-function draw(){
+function drawSnake(){
  ctx.clearRect(0,0,320,320);
-
- // Draw food
  ctx.fillStyle="red";
  ctx.fillRect(food.x, food.y, box, box);
 
- // Move snake
  let head = {...snake[0]};
  if(direction=="RIGHT") head.x += box;
  if(direction=="LEFT") head.x -= box;
  if(direction=="UP") head.y -= box;
  if(direction=="DOWN") head.y += box;
 
- // Eat food
  if(head.x==food.x && head.y==food.y){
-  food = {
-   x: Math.floor(Math.random()*20)*box,
-   y: Math.floor(Math.random()*20)*box
-  };
+  food = {x: Math.floor(Math.random()*20)*box, y: Math.floor(Math.random()*20)*box};
  } else {
   snake.pop();
  }
 
  snake.unshift(head);
 
- // Draw snake
  ctx.fillStyle="lime";
  snake.forEach(s=>ctx.fillRect(s.x, s.y, box, box));
 }
+setInterval(drawSnake, 150);
 
-setInterval(draw, 150);
+/* ========== CAR RACING ========== */
+const car = document.getElementById("playerCar");
+let carX = 135;
+
+document.addEventListener("keydown", e=>{
+ if(e.key=="ArrowLeft" && carX>20) carX -= 20;
+ if(e.key=="ArrowRight" && carX<250) carX += 20;
+ car.style.left = carX + "px";
+});
+
+/* ========== TEMPLE RUN ========== */
+const runner = document.getElementById("runner");
+let isJumping = false;
+
+document.getElementById("runnerBox").addEventListener("click", ()=>{
+ if(!isJumping){
+  isJumping = true;
+  runner.style.bottom = "120px";
+  setTimeout(()=>{
+   runner.style.bottom = "10px";
+   isJumping = false;
+  }, 500);
+ }
+});
+
+setInterval(()=>{
+ let obs = document.createElement("div");
+ obs.className="obstacle";
+ obs.style.left = Math.random()*280 + "px";
+ document.getElementById("runnerBox").appendChild(obs);
+
+ let fall = 0;
+ let drop = setInterval(()=>{
+  fall += 5;
+  obs.style.top = fall + "px";
+  if(fall>350) clearInterval(drop);
+ }, 50);
+
+ setTimeout(()=>obs.remove(), 4000);
+}, 1500);
 
 </script>
 
 </body>
-</html>
+     </html>
