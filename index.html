@@ -1,41 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Online Calculator</title>
+<title>Online Calculator - Free Calculator Tool</title>
 <style>
 body{
-  font-family: Arial;
-  text-align: center;
-  background: #f2f2f2;
+ font-family: Arial;
+ background:#f2f2f2;
 }
-.box{
-  margin-top: 50px;
-}
-input{
-  padding: 10px;
-  width: 200px;
-  margin: 5px;
-}
-button{
-  padding: 10px 20px;
-}
+
 .nav{
-  margin-top:20px;
+ background:white;
+ padding:15px;
+ text-align:center;
+}
+
+.nav a{
+ margin:10px;
+ text-decoration:none;
+ color:blue;
+}
+
+.container{
+ width:80%;
+ margin:auto;
+ background:white;
+ padding:20px;
+ border-radius:10px;
+ margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Online Calculator</h2>
-
 <div class="nav">
-<a href="about.html">Go to About Us</a>
+<a href="index.html">Home</a> |
+<a href="about.html">About</a> |
+<a href="privacy.html">Privacy</a> |
+<a href="contact.html">Contact</a>
 </div>
 
-<div class="box">
-<input id="num1" type="number" placeholder="Enter first number"><br>
-<input id="num2" type="number" placeholder="Enter second number"><br><br>
+<div class="container">
+<h1>Free Online Calculator</h1>
+
+<p>
+This is a simple and free online calculator that helps you perform basic
+mathematical calculations quickly and easily. You can use this calculator
+on your mobile, tablet, or computer without installing any software.
+</p>
+
+<h3>How to Use:</h3>
+<ul>
+<li>Enter the first number in the first box</li>
+<li>Enter the second number in the second box</li>
+<li>Click Add, Subtract, Multiply, or Divide</li>
+</ul>
+
+<h3>Who Can Use This?</h3>
+<p>
+Students, teachers, engineers, and anyone who needs quick calculations
+can use this tool. It is especially helpful for school students and
+beginners in mathematics.
+</p>
+
+<h3>Why This Calculator Is Useful?</h3>
+<p>
+Online calculators save time, reduce mistakes, and are available anytime
+from anywhere with internet access.
+</p>
+
+<h2>Try It Below</h2>
+
+<input id="n1" placeholder="Enter first number"><br><br>
+<input id="n2" placeholder="Enter second number"><br><br>
 
 <button onclick="add()">Add</button>
 <button onclick="sub()">Subtract</button>
@@ -43,33 +80,33 @@ button{
 <button onclick="div()">Divide</button>
 
 <h3 id="result">Result will appear here</h3>
-</div>
 
 <script>
 function add(){
- let a = Number(document.getElementById("num1").value);
- let b = Number(document.getElementById("num2").value);
- document.getElementById("result").innerHTML = "Result: " + (a + b);
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a + b;
 }
 
 function sub(){
- let a = Number(document.getElementById("num1").value);
- let b = Number(document.getElementById("num2").value);
- document.getElementById("result").innerHTML = "Result: " + (a - b);
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a - b;
 }
 
 function mul(){
- let a = Number(document.getElementById("num1").value);
- let b = Number(document.getElementById("num2").value);
- document.getElementById("result").innerHTML = "Result: " + (a * b);
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a * b;
 }
 
 function div(){
- let a = Number(document.getElementById("num1").value);
- let b = Number(document.getElementById("num2").value);
- document.getElementById("result").innerHTML = "Result: " + (a / b);
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a / b;
 }
 </script>
 
+</div>
 </body>
 </html>
