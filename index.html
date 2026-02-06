@@ -1,151 +1,373 @@
-<hr>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Online Tools</title>
 
-<h1 style="text-align:center">🎮 Mini Games Zone</h1>
+<!-- ===== GOOGLE ADSENSE CODE ===== -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6122823738898019"
+     crossorigin="anonymous"></script>
 
-<div style="background:white;padding:20px;border-radius:10px;margin-top:10px;">
+<style>
+body{
+ font-family: Arial;
+ background:#f2f2f2;
+ margin:0;
+}
 
-<!-- GAME BUTTONS -->
-<div style="text-align:center;margin-bottom:15px;">
-<button onclick="showGame('candy')">🍬 Candy Crush</button>
-<button onclick="showGame('snake')">🐍 Snake Game</button>
+.nav{
+ background:#2563eb;
+ padding:15px;
+ text-align:center;
+}
+
+.nav a{
+ margin:10px;
+ text-decoration:none;
+ color:white;
+ font-weight:bold;
+}
+
+.container{
+ width:90%;
+ max-width:900px;
+ margin:auto;
+ background:white;
+ padding:20px;
+ border-radius:10px;
+ margin-top:20px;
+ box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+button{
+ background:#2563eb;
+ color:white;
+ border:none;
+ padding:8px 12px;
+ border-radius:5px;
+ cursor:pointer;
+}
+
+.section{
+ border-top:1px solid #ddd;
+ margin-top:20px;
+ padding-top:20px;
+}
+
+/* ===== GAMES TABS ===== */
+.game-tabs{
+ display:flex;
+ gap:10px;
+ margin-top:20px;
+}
+
+.game-tab{
+ padding:10px;
+ background:#e5e7eb;
+ border-radius:5px;
+ cursor:pointer;
+}
+
+.game-tab.active{
+ background:#2563eb;
+ color:white;
+}
+
+.game-box{
+ display:none;
+ margin-top:20px;
+}
+
+.game-box.active{
+ display:block;
+}
+
+/* ===== CANDY CRUSH GRID ===== */
+#candyBoard{
+ display:grid;
+ grid-template-columns: repeat(8, 40px);
+ gap:3px;
+ width:340px;
+ margin:auto;
+}
+
+.candy{
+ width:40px;
+ height:40px;
+ cursor:pointer;
+}
+
+/* ===== SNAKE GAME ===== */
+#snakeCanvas{
+ background:black;
+ display:block;
+ margin:auto;
+ touch-action:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+<a href="index.html">Home</a> |
+<a href="about.html">About</a> |
+<a href="privacy.html">Privacy</a> |
+<a href="contact.html">Contact</a>
 </div>
 
-<!-- ================= CANDY CRUSH GAME ================= -->
-<div id="candyGame">
+<div class="container">
+<h1>Free Online Calculator</h1>
 
-<h2>🍬 Mini Candy Crush (Match 3)</h2>
-<p>Click candies to swap and make 3 in a row.</p>
+<p>
+This is a simple and free online calculator that helps you perform basic
+mathematical calculations quickly and easily. You can use this calculator
+on your mobile, tablet, or computer without installing any software.
+</p>
 
-<canvas id="candyCanvas" width="300" height="300" style="border:1px solid #ccc;"></canvas>
+<h3>How to Use:</h3>
+<ul>
+<li>Enter the first number in the first box</li>
+<li>Enter the second number in the second box</li>
+<li>Click Add, Subtract, Multiply, or Divide</li>
+</ul>
+
+<h3>Who Can Use This?</h3>
+<p>
+Students, teachers, engineers, and anyone who needs quick calculations
+can use this tool. It is especially helpful for school students and
+beginners in mathematics.
+</p>
+
+<h3>Why This Calculator Is Useful?</h3>
+<p>
+Online calculators save time, reduce mistakes, and are available anytime
+from anywhere with internet access.
+</p>
+
+<h2>Try It Below</h2>
+
+<input id="n1" placeholder="Enter first number"><br><br>
+<input id="n2" placeholder="Enter second number"><br><br>
+
+<button onclick="add()">Add</button>
+<button onclick="sub()">Subtract</button>
+<button onclick="mul()">Multiply</button>
+<button onclick="div()">Divide</button>
+
+<h3 id="result">Result will appear here</h3>
 
 <script>
-const canvas = document.getElementById("candyCanvas");
+function add(){
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a + b;
+}
+function sub(){
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a - b;
+}
+function mul(){
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a * b;
+}
+function div(){
+ let a = Number(document.getElementById("n1").value);
+ let b = Number(document.getElementById("n2").value);
+ document.getElementById("result").innerHTML = a / b;
+}
+</script>
+
+<div class="section">
+<h2>🎮 Mini Games Zone</h2>
+
+<div class="game-tabs">
+<div class="game-tab active" onclick="showGame('candy')">🍬 Candy Crush</div>
+<div class="game-tab" onclick="showGame('snake')">🐍 Snake Game</div>
+</div>
+
+<!-- ===== CANDY CRUSH ===== -->
+<div id="candy" class="game-box active">
+<h3>🍬 Mini Candy Crush (Match 3)</h3>
+<p>Swap candies to match 3 and score points.</p>
+<h4>Score: <span id="score">0</span></h4>
+<div id="candyBoard"></div>
+</div>
+
+<!-- ===== SNAKE GAME ===== -->
+<div id="snake" class="game-box">
+<h3>🐍 Snake Game</h3>
+<p>Use arrows or swipe to move.</p>
+<canvas id="snakeCanvas" width="320" height="320"></canvas>
+</div>
+
+</div>
+</div>
+
+<script>
+// ===== SWITCH TABS =====
+function showGame(game){
+ document.querySelectorAll('.game-box').forEach(g=>g.classList.remove('active'));
+ document.querySelectorAll('.game-tab').forEach(t=>t.classList.remove('active'));
+ document.getElementById(game).classList.add('active');
+ event.target.classList.add('active');
+}
+
+/* ========== CANDY CRUSH LOGIC ========== */
+const colors = ["red","blue","green","yellow","purple","orange"];
+const board = [];
+const size = 8;
+let score = 0;
+let firstCell = null;
+
+function createBoard(){
+ const boardDiv = document.getElementById("candyBoard");
+ boardDiv.innerHTML = "";
+ for(let r=0;r<size;r++){
+  board[r]=[];
+  for(let c=0;c<size;c++){
+   let color = colors[Math.floor(Math.random()*colors.length)];
+   board[r][c]=color;
+   let div = document.createElement("div");
+   div.className="candy";
+   div.style.background=color;
+   div.dataset.r=r;
+   div.dataset.c=c;
+   div.onclick = selectCandy;
+   boardDiv.appendChild(div);
+  }
+ }
+}
+
+function selectCandy(){
+ let r = this.dataset.r;
+ let c = this.dataset.c;
+
+ if(!firstCell){
+  firstCell = this;
+  this.style.outline="3px solid white";
+ }else{
+  swapCandies(firstCell, this);
+  firstCell.style.outline="none";
+  firstCell = null;
+ }
+}
+
+function swapCandies(a,b){
+ let r1=a.dataset.r, c1=a.dataset.c;
+ let r2=b.dataset.r, c2=b.dataset.c;
+
+ let temp = board[r1][c1];
+ board[r1][c1] = board[r2][c2];
+ board[r2][c2] = temp;
+
+ drawBoard();
+ checkMatches();
+}
+
+function drawBoard(){
+ let divs = document.querySelectorAll(".candy");
+ divs.forEach(d=>{
+  let r=d.dataset.r, c=d.dataset.c;
+  d.style.background = board[r][c];
+ });
+}
+
+function checkMatches(){
+ let toClear = [];
+
+ for(let r=0;r<size;r++){
+  for(let c=0;c<size-2;c++){
+   if(board[r][c] && board[r][c]==board[r][c+1] && board[r][c]==board[r][c+2]){
+    toClear.push([r,c],[r,c+1],[r,c+2]);
+   }
+  }
+ }
+
+ for(let c=0;c<size;c++){
+  for(let r=0;r<size-2;r++){
+   if(board[r][c] && board[r][c]==board[r+1][c] && board[r][c]==board[r+2][c]){
+    toClear.push([r,c],[r+1,c],[r+2,c]);
+   }
+  }
+ }
+
+ if(toClear.length>0){
+  score += toClear.length;
+  document.getElementById("score").innerText = score;
+
+  toClear.forEach(p=>{
+   board[p[0]][p[1]] = colors[Math.floor(Math.random()*colors.length)];
+  });
+
+  setTimeout(drawBoard,300);
+ }
+}
+
+createBoard();
+
+/* ========== SNAKE GAME ========== */
+const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
 
-const size = 6;
-const candySize = 50;
-let grid = [];
+let box = 16;
+let snake = [{x:160,y:160}];
+let food = {x:80,y:80};
+let direction = "RIGHT";
 
-const colors = ["red","blue","green","yellow","purple"];
-
-function createGrid(){
-  for(let i=0;i<size;i++){
-    grid[i]=[];
-    for(let j=0;j<size;j++){
-      grid[i][j]=colors[Math.floor(Math.random()*colors.length)];
-    }
-  }
-}
-
-function drawGrid(){
-  for(let i=0;i<size;i++){
-    for(let j=0;j<size;j++){
-      ctx.fillStyle = grid[i][j];
-      ctx.fillRect(j*candySize, i*candySize, candySize-2, candySize-2);
-    }
-  }
-}
-
-let selected = null;
-
-canvas.addEventListener("click", function(e){
-  let x = Math.floor(e.offsetX / candySize);
-  let y = Math.floor(e.offsetY / candySize);
-
-  if(!selected){
-    selected = {x,y};
-  } else {
-    let x2 = selected.x;
-    let y2 = selected.y;
-
-    // Swap
-    let temp = grid[y][x];
-    grid[y][x] = grid[y2][x2];
-    grid[y2][x2] = temp;
-
-    selected = null;
-    drawGrid();
-  }
+document.addEventListener("keydown", e=>{
+ if(e.key=="ArrowUp") direction="UP";
+ if(e.key=="ArrowDown") direction="DOWN";
+ if(e.key=="ArrowLeft") direction="LEFT";
+ if(e.key=="ArrowRight") direction="RIGHT";
 });
 
-createGrid();
-drawGrid();
-</script>
-</div>
+// Mobile Swipe Support
+let touchStartX = 0;
+canvas.addEventListener("touchstart", e=>{
+ touchStartX = e.touches[0].clientX;
+});
+canvas.addEventListener("touchend", e=>{
+ let touchEndX = e.changedTouches[0].clientX;
+ if(touchEndX < touchStartX) direction="LEFT";
+ if(touchEndX > touchStartX) direction="RIGHT";
+});
 
-<!-- ================= SNAKE GAME ================= -->
-<div id="snakeGame" style="display:none;">
+function draw(){
+ ctx.clearRect(0,0,320,320);
 
-<h2>🐍 Snake Game</h2>
-<p>Use arrow keys to move the snake.</p>
+ // Draw food
+ ctx.fillStyle="red";
+ ctx.fillRect(food.x, food.y, box, box);
 
-<canvas id="snakeCanvas" width="300" height="300" style="border:1px solid #ccc;"></canvas>
+ // Move snake
+ let head = {...snake[0]};
+ if(direction=="RIGHT") head.x += box;
+ if(direction=="LEFT") head.x -= box;
+ if(direction=="UP") head.y -= box;
+ if(direction=="DOWN") head.y += box;
 
-<script>
-const sCanvas = document.getElementById("snakeCanvas");
-const sctx = sCanvas.getContext("2d");
+ // Eat food
+ if(head.x==food.x && head.y==food.y){
+  food = {
+   x: Math.floor(Math.random()*20)*box,
+   y: Math.floor(Math.random()*20)*box
+  };
+ } else {
+  snake.pop();
+ }
 
-let box = 20;
-let snake = [{x:10,y:10}];
-let food = {x:5,y:5};
-let dir = "RIGHT";
+ snake.unshift(head);
 
-document.addEventListener("keydown", direction);
-
-function direction(event){
-  if(event.key === "ArrowLeft") dir="LEFT";
-  if(event.key === "ArrowUp") dir="UP";
-  if(event.key === "ArrowRight") dir="RIGHT";
-  if(event.key === "ArrowDown") dir="DOWN";
+ // Draw snake
+ ctx.fillStyle="lime";
+ snake.forEach(s=>ctx.fillRect(s.x, s.y, box, box));
 }
 
-function drawSnake(){
-  sctx.clearRect(0,0,300,300);
+setInterval(draw, 150);
 
-  // draw food
-  sctx.fillStyle = "red";
-  sctx.fillRect(food.x*box, food.y*box, box, box);
-
-  // draw snake
-  sctx.fillStyle = "green";
-  for(let i=0;i<snake.length;i++){
-    sctx.fillRect(snake[i].x*box, snake[i].y*box, box, box);
-  }
-
-  let head = {x:snake[0].x, y:snake[0].y};
-
-  if(dir==="LEFT") head.x--;
-  if(dir==="RIGHT") head.x++;
-  if(dir==="UP") head.y--;
-  if(dir==="DOWN") head.y++;
-
-  snake.unshift(head);
-
-  if(head.x === food.x && head.y === food.y){
-    food = {
-      x: Math.floor(Math.random()*15),
-      y: Math.floor(Math.random()*15)
-    };
-  } else {
-    snake.pop();
-  }
-}
-
-setInterval(drawSnake, 150);
 </script>
-</div>
 
-</div>
-
-<script>
-function showGame(game){
-  document.getElementById("candyGame").style.display="none";
-  document.getElementById("snakeGame").style.display="none";
-
-  if(game==="candy"){
-    document.getElementById("candyGame").style.display="block";
-  } else {
-    document.getElementById("snakeGame").style.display="block";
-  }
-}
-</script>
+</body>
+</html>
