@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Guess The Number Game</title>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6122823738898019"
+     crossorigin="anonymous"></script>
+
+<style>
+body{
+ font-family: Arial;
+ background:#f2f6ff;
+}
+
+.nav{
+ background:#1e40af;
+ padding:15px;
+ text-align:center;
+}
+
+.nav a{
+ color:white;
+ margin:10px;
+ text-decoration:none;
+}
+
+.container{
+ width:80%;
+ margin:auto;
+ background:white;
+ padding:20px;
+ border-radius:10px;
+ margin-top:20px;
+ text-align:center;
+}
+
+button{
+ padding:10px 20px;
+ background:#2563eb;
+ color:white;
+ border:none;
+ border-radius:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+<a href="index.html">Home</a> |
+<a href="bmi.html">BMI Calculator</a> |
+<a href="age.html">Age Calculator</a> |
+<a href="percentage.html">Percentage</a> |
+<a href="game.html">Game</a> |
+<a href="privacy.html">Privacy</a> |
+<a href="contact.html">Contact</a>
+</div>
+
+<div class="container">
+<h1>🎯 Guess The Number Game</h1>
+
+<p>
+I have chosen a number between 1 and 100.  
+Try to guess it!
+</p>
+
+<input id="guess" placeholder="Enter your guess"><br><br>
+<button onclick="check()">Check</button>
+
+<h3 id="msg"></h3>
+<h4 id="tries"></h4>
+
+<script>
+let secret = Math.floor(Math.random() * 100) + 1;
+let count = 0;
+
+function check(){
+ let g = Number(document.getElementById("guess").value);
+ count++;
+
+ if(g === secret){
+   document.getElementById("msg").innerHTML = "🎉 Correct! You won!";
+ } 
+ else if(g > secret){
+   document.getElementById("msg").innerHTML = "Too High! Try again.";
+ }
+ else {
+   document.getElementById("msg").innerHTML = "Too Low! Try again.";
+ }
+
+ document.getElementById("tries").innerHTML = "Attempts: " + count;
+}
+</script>
+
+</div>
+
+<footer style="text-align:center; margin-top:20px;">
+© 2026 Smart Online Tools
+</footer>
+
+</body>
+  </html>
