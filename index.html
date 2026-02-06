@@ -35,32 +35,46 @@ body{
  margin-top:20px;
 }
 
-/* ===== CANDY CRUSH STYLE ===== */
+/* ====== CANDY CRUSH STYLE (BETTER LOOK) ====== */
 .game-section{
  margin-top:30px;
  padding-top:20px;
  border-top:1px solid #ddd;
+ text-align:center;
 }
 
-#scoreBox{
- font-size:18px;
+#scoreBar{
+ background:#ff66b2;
+ color:white;
+ padding:10px;
+ border-radius:10px;
+ width:60%;
+ margin:auto;
  font-weight:bold;
- margin-bottom:10px;
 }
 
 #candyBoard{
  display:grid;
- grid-template-columns: repeat(8, 40px);
- gap:3px;
- width:340px;
- margin:auto;
+ grid-template-columns: repeat(8, 45px);
+ gap:4px;
+ width:380px;
+ margin:20px auto;
+ padding:10px;
+ background:#f8e8ff;
+ border-radius:10px;
+ box-shadow:0px 0px 10px #ddd;
 }
 
 .candy{
- width:40px;
- height:40px;
+ width:45px;
+ height:45px;
  cursor:pointer;
- border-radius:5px;
+ border-radius:50%;
+ transition:0.2s;
+}
+
+.candy:hover{
+ transform:scale(1.1);
 }
 </style>
 </head>
@@ -121,19 +135,16 @@ function add(){
  let b = Number(document.getElementById("n2").value);
  document.getElementById("result").innerHTML = a + b;
 }
-
 function sub(){
  let a = Number(document.getElementById("n1").value);
  let b = Number(document.getElementById("n2").value);
  document.getElementById("result").innerHTML = a - b;
 }
-
 function mul(){
  let a = Number(document.getElementById("n1").value);
  let b = Number(document.getElementById("n2").value);
  document.getElementById("result").innerHTML = a * b;
 }
-
 function div(){
  let a = Number(document.getElementById("n1").value);
  let b = Number(document.getElementById("n2").value);
@@ -141,20 +152,17 @@ function div(){
 }
 </script>
 
-<!-- ========== ONLY CANDY CRUSH ADDED ========== -->
+<!-- ======== CANDY CRUSH (IMPROVED) ======== -->
 <div class="game-section">
 <h2>🍬 Candy Crush (Match 3)</h2>
-<p>Click two candies to swap and make 3 in a row.</p>
-
-<div id="scoreBox">Score: <span id="score">0</span></div>
+<div id="scoreBar">Score: <span id="score">0</span></div>
 <div id="candyBoard"></div>
 </div>
 
 </div>
 
 <script>
-/* ===== REAL WORKING CANDY CRUSH ===== */
-const colors = ["red","blue","green","yellow","purple","orange"];
+const colors = ["#ff4d4d","#4da6ff","#66cc66","#ffcc00","#cc66ff","#ff8c42"];
 const board = [];
 const size = 8;
 let score = 0;
@@ -249,4 +257,4 @@ createBoard();
 </script>
 
 </body>
-</html>
+                                                </html>
