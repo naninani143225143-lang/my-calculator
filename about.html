@@ -1,11 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>About Us</title>
+<title>Online Calculator</title>
+
+<!-- Google AdSense Auto Ads -->
+<script async 
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-6122823738898019"
+crossorigin="anonymous"></script>
+
+<style>
+body{
+  font-family: Arial;
+  text-align: center;
+  background: #f2f2f2;
+}
+.box{
+  margin-top: 40px;
+}
+input{
+  padding: 10px;
+  width: 220px;
+  margin: 5px;
+}
+button{
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+.footer{
+  margin-top: 60px;
+}
+a{
+  text-decoration: none;
+  margin: 0 5px;
+}
+</style>
 </head>
+
 <body>
-<h1>About Us</h1>
-<p>This is a simple website created for learning purposes.</p>
-<a href="index.html">Go Home</a>
+
+<h2>Online Calculator</h2>
+<p>Fast and simple calculator for daily use.</p>
+
+<div class="box">
+<input id="num1" type="number" placeholder="Enter first number"><br>
+<input id="num2" type="number" placeholder="Enter second number"><br><br>
+
+<button onclick="add()">Add</button>
+<button onclick="sub()">Subtract</button>
+<button onclick="mul()">Multiply</button>
+<button onclick="div()">Divide</button>
+
+<h3 id="result">Result will appear here</h3>
+</div>
+
+<!-- Important Footer Links (AdSense friendly) -->
+<div class="footer">
+<a href="about.html">About Us</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy.html">Privacy Policy</a>
+</div>
+
+<script>
+function add(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a + b);
+}
+
+function sub(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a - b);
+}
+
+function mul(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a * b);
+}
+
+function div(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a / b);
+}
+</script>
+
 </body>
-</html>
+  </html>
