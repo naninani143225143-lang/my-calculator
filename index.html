@@ -1,29 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Calculator</title>
+<title>Smart Online Calculator</title>
 
-    <!-- Google AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6122823738898019"
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
      crossorigin="anonymous"></script>
+
+<style>
+body{
+  font-family: Arial;
+  text-align: center;
+  background: #f2f2f2;
+  margin: 0;
+}
+
+.header{
+  background: #1e3c72;
+  color: white;
+  padding: 15px;
+  font-size: 22px;
+}
+
+.nav{
+  background: #333;
+  padding: 10px;
+}
+
+.nav a{
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.box{
+  margin-top: 30px;
+  background: white;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  box-shadow: 0px 0px 10px gray;
+  border-radius: 10px;
+}
+
+input{
+  padding: 10px;
+  width: 80%;
+  margin: 5px;
+}
+
+button{
+  padding: 10px 20px;
+  margin: 5px;
+  background: #1e3c72;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.footer{
+  margin-top: 30px;
+  padding: 15px;
+  background: #222;
+  color: white;
+}
+</style>
 </head>
+
 <body>
-    <h1>Simple Calculator</h1>
 
-    <input id="num1" type="number" placeholder="Enter first number">
-    <input id="num2" type="number" placeholder="Enter second number">
-    <br><br>
-    <button onclick="add()">Add</button>
+<div class="header">
+Smart Online Calculator
+</div>
 
-    <h2 id="result">Result: </h2>
+<div class="nav">
+<a href="index.html">Home</a> |
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a> |
+<a href="privacy.html">Privacy Policy</a>
+</div>
 
-    <script>
-        function add() {
-            let a = document.getElementById("num1").value;
-            let b = document.getElementById("num2").value;
-            let sum = Number(a) + Number(b);
-            document.getElementById("result").innerHTML = "Result: " + sum;
-        }
-    </script>
+<!-- AdSense Top Ad -->
+<div style="margin:20px auto;">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="YOUR-ADSENSE-ID"
+     data-ad-slot="YOUR-AD-SLOT"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="box">
+<h2>Calculator</h2>
+
+<input id="num1" type="number" placeholder="Enter first number"><br>
+<input id="num2" type="number" placeholder="Enter second number"><br><br>
+
+<button onclick="add()">Add</button>
+<button onclick="sub()">Subtract</button>
+<button onclick="mul()">Multiply</button>
+<button onclick="div()">Divide</button>
+
+<h3 id="result">Result will appear here</h3>
+</div>
+
+<!-- AdSense Bottom Ad -->
+<div style="margin:20px auto;">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="YOUR-ADSENSE-ID"
+     data-ad-slot="YOUR-AD-SLOT"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="footer">
+© 2026 Smart Calculator | All Rights Reserved
+</div>
+
+<script>
+function add(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a + b);
+}
+
+function sub(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a - b);
+}
+
+function mul(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a * b);
+}
+
+function div(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+
+ if(b == 0){
+   document.getElementById("result").innerHTML = "Cannot divide by zero";
+ } else {
+   document.getElementById("result").innerHTML = "Result: " + (a / b);
+ }
+}
+</script>
+
 </body>
 </html>
