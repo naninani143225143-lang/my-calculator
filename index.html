@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>About Us</title>
+<title>My Online Calculator</title>
 <style>
 body{
   font-family: Arial;
-  background:#f2f2f2;
+  text-align: center;
+  background: #f2f2f2;
 }
 .box{
-  width:80%;
-  margin:auto;
-  margin-top:40px;
-  background:white;
-  padding:20px;
-  border-radius:10px;
+  margin-top: 50px;
 }
-a{
-  text-decoration:none;
+input{
+  padding: 10px;
+  width: 200px;
+  margin: 5px;
+}
+button{
+  padding: 10px 20px;
+}
+.nav{
+  margin-top:20px;
 }
 </style>
 </head>
+
 <body>
 
-<div class="box">
-<h2>About Us</h2>
+<h2>Online Calculator</h2>
 
-<p>
-This website provides free online calculator tools for students and general users.
-Our goal is to make simple calculations easy, fast, and accessible for everyone.
-</p>
-
-<p>
-We continuously improve our tools to provide a better user experience.
-</p>
-
-<br>
-<a href="index.html">⬅ Back to Home</a>
+<div class="nav">
+<a href="about.html">Go to About Us</a>
 </div>
+
+<div class="box">
+<input id="num1" type="number" placeholder="Enter first number"><br>
+<input id="num2" type="number" placeholder="Enter second number"><br><br>
+
+<button onclick="add()">Add</button>
+<button onclick="sub()">Subtract</button>
+<button onclick="mul()">Multiply</button>
+<button onclick="div()">Divide</button>
+
+<h3 id="result">Result will appear here</h3>
+</div>
+
+<script>
+function add(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a + b);
+}
+
+function sub(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a - b);
+}
+
+function mul(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a * b);
+}
+
+function div(){
+ let a = Number(document.getElementById("num1").value);
+ let b = Number(document.getElementById("num2").value);
+ document.getElementById("result").innerHTML = "Result: " + (a / b);
+}
+</script>
 
 </body>
 </html>
